@@ -10,9 +10,7 @@ for line in f:
     cols = max(cols, new_line[0] + 1, new_line[2] + 1)
 f.close()
 
-vent_map = list()
-for row in range(rows):
-    vent_map.append([0] * cols)
+vent_map = [[0] * cols for _ in range(rows)]
 
 for line in lines:
     x1, x2, y1, y2 = line[1], line[3], line[0], line[2]
@@ -26,7 +24,7 @@ for line in lines:
             vent_map[row_idx][y1] += 1
     else:  # if diagonal
         if x1 > x2:
-            x1, x2, y1, y2 = x2, x1, y2, y1
+            x1, x2, y1, y2 = x2, x1, y2, y1  # reorder left to right if necessary
         if y1 < y2:  # if top left to bottom right diagonal
             while y1 <= y2:
                 vent_map[x1][y1] += 1

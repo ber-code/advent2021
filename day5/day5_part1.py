@@ -9,9 +9,8 @@ for line in f:
     rows = max(rows, new_line[1] + 1, new_line[3] + 1)
     cols = max(cols, new_line[0] + 1, new_line[2] + 1)
 f.close()
-vent_map = list()
-for row in range(rows):
-    vent_map.append([0] * cols)
+
+vent_map = [[0] * cols for _ in range(rows)]
 
 for line in lines:
     x1, x2, y1, y2 = line[1], line[3], line[0], line[2]
