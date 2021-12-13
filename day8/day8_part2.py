@@ -4,6 +4,7 @@ for line in f:
     clean_line = line.strip().split()
     clean_line.remove("|")
     entries.append(clean_line)
+f.close()
 
 code_map = [
     set(["a", "b", "c", "e", "f", "g"]),

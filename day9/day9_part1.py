@@ -5,6 +5,7 @@ for line in f:
     for c in line.strip():
         new_line.append(int(c))
     smoke_map.append(new_line)
+f.close()
 row_count, col_count = len(smoke_map), len(smoke_map[0])
 
 

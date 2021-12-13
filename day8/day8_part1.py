@@ -4,6 +4,7 @@ for line in f:
     clean_line = line.split()
     clean_line.remove("|")
     entries.append(clean_line)
+f.close()
 
 unique_lengths = set([2, 3, 4, 7])
 
