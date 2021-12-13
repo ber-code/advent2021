@@ -1,6 +1,6 @@
 f = open("input_day7.txt", "r")
 for line in f:
-    crab_input = list(map(int, line.strip().split(",")))
+    crab_input = list(map(int, line.strip().split()))
 f.close()
 left_crab, right_crab = min(crab_input), max(crab_input)
 crabs = {}
