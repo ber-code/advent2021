@@ -47,7 +47,8 @@ for row_idx in range(row_count):
             if len(basins) < 3:
                 heapq.heappush(basins, size)
                 continue
-            heapq.heappushpop(basins, size)
+            if size > basins[0]:
+                heapq.heappushpop(basins, size)
 
 product = 1
 for size in basins:

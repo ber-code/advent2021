@@ -1,0 +1,56 @@
+a: d
+b: e
+c: a
+d: f
+e: g
+f: b
+g: c
+abcdefg
+
+step 1 -> a maps to letters in length3code7 minus letters in length2code1
+	-> letters in length2code1 mapped to c and f
+step 2 -> the two letters (ef) in length4code4 not in length2code1 are added to b and d
+step 3 -> 6lengthcode9 (store this) uses one unused character so far (cefabd)
+	-> g maps to unused char (c in this case)
+step 4 -> 7lengthcode8 has one unused character so far
+	-> e maps to unused char (g in this case)
+step 5 -> there are 2 6lengths remaining, one only uses one of e or f (maps to missing missing d in 6lengthcode0) and one of a or b (maps to missing c in 6lengthcode6)
+	-> cdfgeb and cagedb
+	-> cdfgeb uses only b, missing a
+		-> f maps to b 
+		-> c maps to a
+	-> cagedb uses only e, missing f
+		-> b maps to e
+		-> d maps to f
+*better to map the scrambled wires to the "correct" sockets than the way above
+
+step 1 ->
+	d: a
+	e: cf
+	b: cf
+step 2 ->
+	d: a
+	e: cf
+	b: cf
+	c: bd
+	g: bd
+step 3 ->
+	d: a
+	e: cf
+	b: cf
+	c: bd
+	g: bd
+	f: g
+step 4 ->
+	d: a
+	e: cf
+	b: cf
+	c: bd
+	g: bd
+	f: g
+	a: e
+step 5 -> what is step 5? how do i de-scramble the wires that map to {bd} and {cf}?
+	fgaecd
+	agebfg
+	cefbgd
+	
