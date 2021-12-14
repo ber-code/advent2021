@@ -1,6 +1,15 @@
+class ListNode:
+    def __init__(self, val):
+        self.val = val
+        self.next = None
+
+
+head = node = ListNode(None)
 f = open("test.txt", "r")
-for line in f:
-    seq = list(line.strip())
+for template in f:
+    for polymer in template.strip():
+        node.next = ListNode(polymer)
+        node = node.next
     break
 for line in f:
     break
@@ -11,33 +20,37 @@ for line in f:
 f.close()
 
 
-def step(
-    sequence, num_steps
-):  # need to optimize for 40 steps... N^2 time complexity (N = len(seq))
+def step(head_node, num_steps):
     step = 0
     while step < num_steps:
-        check_idx = 0
-        while check_idx < len(sequence) - 1:
-            pair = "".join(sequence[check_idx : check_idx + 2])
+        print("ON STEP ", step)
+        node = head_node.next
+        while node.next:
+            pair = "".join((node.val, node.next.val))
             if pair in pair_insrt:
-                sequence.insert(check_idx + 1, pair_insrt[pair])
-                check_idx += 2
+                next = node.next
+                node.next = ListNode(pair_insrt[pair])
+                node.next.next = next
+                node = node.next.next
             else:
-                check_idx += 1
+                node = node.next
         step += 1
 
 
-step(seq, 40)
-counter = {}
-high_count = 0
-low_track = (None, float("inf"))  # track lowest char and its count in tuple
-for c in seq:
-    if c not in counter:
-        counter[c] = 0
-    counter[c] += 1
-    if counter[c] > high_count:
-        high_count = counter[c]
-    if counter[c] < low_track[1] or low_track[0] == c:
-        low_track = (c, counter[c])
+step(head, 40)
 
-print(high_count - low_track[1])
+counter = {}
+node = head.next
+while node:
+    if node.val not in counter:
+        counter[node.val] = 0
+    counter[node.val] += 1
+    node = node.next
+
+low, high = float("inf"), float("-inf")
+for polymer in counter:
+    if counter[polymer] < low:
+        low = counter[polymer]
+    if counter[polymer] > high:
+        high = counter[polymer]
+print(high - low)
