@@ -1,6 +1,16 @@
-f = open("test.txt", "r")
-for line in f:
-    seq = list(line.strip())
+# naive solution using linked list
+class ListNode:
+    def __init__(self, val):
+        self.val = val
+        self.next = None
+
+
+head = node = ListNode(None)
+f = open("input_day14.txt", "r")
+for template in f:
+    for polymer in template.strip():
+        node.next = ListNode(polymer)
+        node = node.next
     break
 for line in f:
     break
@@ -11,31 +21,33 @@ for line in f:
 f.close()
 
 
-def step(sequence, num_steps):
+def most_minus_least_common_polymer_after(n_steps, head_node):
     step = 0
-    while step < num_steps:
-        check_idx = 0
-        while check_idx < len(sequence) - 1:
-            pair = "".join(sequence[check_idx : check_idx + 2])
+    while step < n_steps:
+        node = head_node.next
+        while node.next:
+            pair = "".join((node.val, node.next.val))
             if pair in pair_insrt:
-                sequence.insert(check_idx + 1, pair_insrt[pair])
-                check_idx += 2
+                next = node.next
+                node.next = ListNode(pair_insrt[pair])
+                node.next.next = next
+                node = node.next.next
             else:
-                check_idx += 1
+                node = node.next
         step += 1
+    counter = {}
+    low_track, high_count = (None, float("inf")), float("-inf")
+    node = head.next
+    while node:
+        if node.val not in counter:
+            counter[node.val] = 0
+        counter[node.val] += 1
+        if counter[node.val] > high_count:
+            high_count = counter[node.val]
+        if counter[node.val] < low_track[1] or low_track[0] == node.val:
+            low_track = (node.val, counter[node.val])
+        node = node.next
+    return high_count - low_track[1]
 
 
-step(seq, 10)
-counter = {}
-high_count = 0
-low_track = (None, float("inf"))  # track lowest char and its count in tuple
-for c in seq:
-    if c not in counter:
-        counter[c] = 0
-    counter[c] += 1
-    if counter[c] > high_count:
-        high_count = counter[c]
-    if counter[c] < low_track[1] or low_track[0] == c:
-        low_track = (c, counter[c])
-
-print(high_count - low_track[1])
+print(most_minus_least_common_polymer_after(10, head))

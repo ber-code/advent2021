@@ -81,7 +81,6 @@ def calc_output_val(entry):
     return int(output_val)
 
 
-# print(calc_output_val(test))
 output_total = 0
 for line in entries:
     output_total += calc_output_val(line)
