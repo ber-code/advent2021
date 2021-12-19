@@ -34,7 +34,6 @@ while tile_idx < 25:
 
 cavern_width, cavern_height = len(cavern), len(cavern[0])
 prio_q = [(cavern[0][0], (0, 0))]
-visited = set()
 dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)]
 memo = [[float("inf")] * cavern_width for _ in range(cavern_height)]
 memo[0][0] = cavern[0][0]
@@ -51,7 +50,6 @@ def can_go(row_idx, col_idx):
 
 while prio_q:
     origin = heapq.heappop(prio_q)
-    visited.add(origin[1])
     origin_val = memo[origin[1][0]][origin[1][1]]
     for dir in dirs:
         visit_row, visit_col = origin[1][0] + dir[0], origin[1][1] + dir[1]

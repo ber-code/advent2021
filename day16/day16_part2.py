@@ -21,8 +21,6 @@ for line in f:
     input = line.strip()
 f.close()
 
-test = "9C0141080250320F1802104A08"
-
 
 def hex_to_binary(packet):
     binary = []
